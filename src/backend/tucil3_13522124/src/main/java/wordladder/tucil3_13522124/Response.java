@@ -8,12 +8,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Response {
     private String message;
     private Object data;
-    private long executionTime;
+    private double executionTime;
     private int visitedNode;
     private long executionMemory;
 
     // Constructor
-    public Response(String message, Object data, long executionTime, int visitedNode, long executionMemory) {
+    public Response(String message, Object data, double executionTime, int visitedNode, long executionMemory) {
         this.message = message;
         this.data = data;
         this.executionTime = executionTime;
@@ -38,11 +38,11 @@ public class Response {
         this.data = data;
     }
 
-    public long getExecutionTime() {
+    public double getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(long executionTime) {
+    public void setExecutionTime(double executionTime) {
         this.executionTime = executionTime;
     }
 

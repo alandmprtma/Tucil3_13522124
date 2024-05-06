@@ -32,7 +32,7 @@ public class Api {
         Result path = null;
         Runtime runtime = Runtime.getRuntime();
         runtime.gc();
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         long memoryBefore = runtime.freeMemory();
         if(method.equals("UCS")){
             path = UCS.wordLadder(startWord, endWord, dictionary);
@@ -43,8 +43,8 @@ public class Api {
             path = GreedyBestFirstSearch.findWordLadder(startWord, endWord, dictionary);
         }
         long memoryAfter = runtime.freeMemory();
-        long endTime = System.currentTimeMillis();
-        long executionTime = endTime-startTime;
+        long endTime = System.nanoTime();
+        double executionTime = (endTime-startTime)/1000000.0;
         long executionMemory = (memoryBefore - memoryAfter)/1000;
         return ResponseEntity.ok(new Response(null, path.getPath(), executionTime, path.getVisitedCount(),executionMemory));
     }

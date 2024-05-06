@@ -62,7 +62,11 @@ public class Response {
         this.executionMemory = executionMemory;
     }
 
-    // Convert this Response object into a JSON ResponseEntity
+     /**
+     * Mengonversi objek Response menjadi representasi JSON ResponseEntity.
+     *
+     * @return ResponseEntity yang berisi representasi JSON dari objek Response
+     */
     public ResponseEntity<String> json() {
         ObjectMapper mapper = new ObjectMapper();
         try {

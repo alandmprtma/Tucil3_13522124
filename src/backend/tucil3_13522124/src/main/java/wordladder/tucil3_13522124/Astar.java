@@ -4,7 +4,13 @@ import java.util.*;
 import java.io.IOException;
 
 public class Astar {
-    // Fungsi heuristik: jumlah karakter yang berbeda antara dua kata
+     /**
+     * Fungsi heuristik: menghitung jumlah karakter yang berbeda antara dua kata.
+     *
+     * @param word kata pertama
+     * @param endWord kata kedua
+     * @return jumlah karakter yang berbeda antara dua kata
+     */
     private static int heuristic(String word, String endWord) {
         int count = 0;
         for (int i = 0; i < word.length(); i++) {
@@ -15,6 +21,14 @@ public class Astar {
         return count;
     };
     
+    /**
+     * Mencari jalur terpendek antara dua kata menggunakan algoritma A*.
+     *
+     * @param start kata awal
+     * @param end kata target
+     * @param dictionary himpunan kata-kata valid
+     * @return objek Result yang berisi jalur terpendek dan jumlah node yang dikunjungi
+     */
     public static Result wordLadder(String start, String end, Set<String> dictionary) {
         PriorityQueue<Pair<Integer, String>> openList = new PriorityQueue<>(Comparator.comparingInt(Pair::getKey));
         Set<String> visited = new HashSet<>();

@@ -4,7 +4,14 @@ import java.io.IOException;
 import java.util.*;
 
 public class UCS {
-    // Get neighbors that differ by exactly one letter
+    /**
+     * Mencari jalur terpendek antara dua kata menggunakan algoritma Uniform Cost Search.
+     *
+     * @param start kata awal
+     * @param end kata target
+     * @param dictionary himpunan kata-kata valid
+     * @return objek Result yang berisi jalur terpendek dan jumlah node yang dikunjungi
+     */
     public static Result wordLadder(String start, String end, Set<String> dictionary) {
         PriorityQueue<Pair<Integer, String>> openList = new PriorityQueue<>(Comparator.comparingInt(Pair::getKey));
         Map<String, Integer> cost = new HashMap<>();
@@ -20,7 +27,7 @@ public class UCS {
             String currentWord = current.getValue();
     
             if (currentWord.equals(end)) {
-                return new Result(reconstructPath(parents, start, end), visitedCount);
+                return new Result(DictionaryWord.reconstructPath(parents, start, end), visitedCount);
             }
     
             if (!visited.contains(currentWord)) {
@@ -39,14 +46,6 @@ public class UCS {
         }
     
         return new Result(Collections.emptyList(), visitedCount);
-    }
-
-    private static List<String> reconstructPath(Map<String, String> parents, String start, String end) {
-        LinkedList<String> path = new LinkedList<>();
-        for (String at = end; at != null; at = parents.get(at)) {
-            path.addFirst(at);
-        }
-        return path;
     }
 
     public static void main(String[] args) {

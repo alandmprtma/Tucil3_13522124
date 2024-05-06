@@ -1,16 +1,22 @@
 package wordladder.tucil3_13522124;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 public class GreedyBestFirstSearch {
+     /**
+     * Mencari jalur terpendek antara dua kata menggunakan algoritma Greedy Best-First Search.
+     *
+     * @param start kata awal
+     * @param end kata target
+     * @param dictionary himpunan kata-kata valid
+     * @return objek Result yang berisi jalur terpendek dan jumlah node yang dikunjungi
+     */
     public static Result findWordLadder(String start, String end, Set<String> dictionary) {
         PriorityQueue<Pair<String, Integer>> queue = new PriorityQueue<>(Comparator.comparingInt(Pair::getValue));
         Set<String> visited = new HashSet<>();
@@ -26,7 +32,7 @@ public class GreedyBestFirstSearch {
             String currentWord = node.getKey();
     
             if (currentWord.equals(end)) {
-                return new Result(reconstructPath(parent, start, end), visitedCount);
+                return new Result(DictionaryWord.reconstructPath(parent, start, end), visitedCount);
             }
     
             for (String neighbor : DictionaryWord.getNeighbors(currentWord, dictionary)) {
@@ -41,16 +47,13 @@ public class GreedyBestFirstSearch {
     
         return new Result(Collections.emptyList(), visitedCount);  // Jika tidak ditemukan jalur
     }
-
-    private static List<String> reconstructPath(Map<String, String> parent, String start, String end) {
-        List<String> path = new ArrayList<>();
-        for (String at = end; at != null; at = parent.get(at)) {
-            path.add(at);
-        }
-        Collections.reverse(path);
-        return path;
-    }
-
+    /**
+     * Menghitung nilai heuristik antara dua kata.
+     *
+     * @param word kata pertama
+     * @param end kata kedua
+     * @return jumlah karakter yang berbeda antara dua kata
+     */
     private static int heuristic(String word, String end) {
         int mismatch = 0;
         for (int i = 0; i < word.length(); i++) {

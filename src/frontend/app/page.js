@@ -57,8 +57,8 @@ export default function Home() {
     }
     else if (startWord == endWord){
       setErrorMessage("Start Word and End Word must a different value.");
-      setLoading(false)
       await delay(1500);
+      setLoading(false)
       setErrorMessage(null);
       return;
     }
@@ -110,6 +110,7 @@ export default function Home() {
             setLength(e.target.value);
             setStartWord('');
             setEndWord('');
+            setActiveAlgorithm('');
           }}
           className="mt-1 block w-full px-3 py-2 border border-gray-300 text-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -201,6 +202,7 @@ export default function Home() {
               <div className="p-8 flex flex-col items-center">
                   <WordLadderGrid words={results.data} />
                   <p className="text-center mt-4 text-xl text-black">Found Word Ladder Solution from <strong>{startWord}</strong> to <strong>{endWord}</strong> in <strong>{results.executionTime} milliseconds</strong>!</p>
+                  <p className="text-black text-center mt-4 text-xl">Solution Length: <strong>{results.data.length}</strong></p>
                   <p className="text-black text-center mt-4 text-xl">Nodes Traversed: <strong>{results.visitedNode}</strong></p>
                   <p className="text-black text-center mt-4 text-xl">Memory Used: <strong>{results.executionMemory} KB</strong></p>
               </div>

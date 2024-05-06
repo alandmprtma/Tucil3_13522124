@@ -1,8 +1,4 @@
 function WordLadderGrid({ words }) {
-  const maxLength = words.reduce((max, word) => Math.max(max, word.length), 0);
-  
-  // Array untuk menyimpan status hijau pada setiap kolom
-  const greenColumns = Array(maxLength).fill(false);
 
   return (
     <div className={`grid grid-rows-${words.length} gap-2`}>
@@ -10,15 +6,11 @@ function WordLadderGrid({ words }) {
          <div key={wordIndex} className="flex w-full">
           {word.toUpperCase().split('').map((char, charIndex) => {
             let bgColor = 'bg-gray-200';
-            if (greenColumns[charIndex]) {
-              // Jika kolom ini sudah hijau, teruskan hijau
-              bgColor = 'bg-green-500';
-            } else if (wordIndex > 0) {
+            if (wordIndex > 0) {
               // Membandingkan dengan kata sebelumnya
-              const previousChar = words[wordIndex - 1][charIndex] || '';
-              if (char !== previousChar.toUpperCase()) {
+              const endChar = words[words.length - 1][charIndex] || '';
+              if (char == endChar.toUpperCase()) {
                 bgColor = 'bg-green-500';
-                greenColumns[charIndex] = true; // Set kolom ini menjadi hijau permanen
               }
             }
 
